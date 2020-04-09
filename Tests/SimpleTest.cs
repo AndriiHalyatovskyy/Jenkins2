@@ -17,9 +17,9 @@ namespace Jenkins2.Tests
 		[Test]
 		public void ACL_UploadToFilterOrganizeProfileTemplateBTest()
 		{
-			Page.Goole.DoSearch("wikipedia");
-			Page.SearchResult.OpenSiteByTitle("wikipedia");
-			Assert.IsTrue(Page.Wikipedia.getTitleText().Contains("Wikipedia"));
+			Pages.Goole.DoSearch("wikipedia");
+			Pages.SearchResult.OpenSiteByTitle("wikipedia");
+			Assert.IsTrue(Pages.Wikipedia.getTitleText().Contains("Wikipedia"));
 		}
 	}
 }

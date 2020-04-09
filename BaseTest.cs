@@ -8,7 +8,7 @@ namespace Jenkins2
 	public abstract class BaseTest
 	{
 		private IWebDriver driver;
-		private Pages.Pages _page;
+		private Pages.Pages _pages;
 
 		protected IWebDriver Driver
 		{
@@ -27,7 +27,7 @@ namespace Jenkins2
 			}
 		}
 
-		protected Pages.Pages Page => _page ?? (_page = new Pages.Pages(
+		protected Pages.Pages Pages => _pages ?? (_pages = new Pages.Pages(
 				driver: Driver));
 
 
