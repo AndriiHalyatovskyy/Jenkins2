@@ -16,7 +16,7 @@ namespace Jenkins2.Pages
 
 		public class WikipediaSelectors
 		{
-			public readonly By logoTitle = By.ClassName("central-textlogo-wrapper");
+			public readonly By logoTitle = By.CssSelector(".central-textlogo__image.sprite.svg-Wikipedia_wordmark");
 
 		}
 	}
