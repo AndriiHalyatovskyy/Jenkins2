@@ -26,7 +26,7 @@ namespace Jenkins2.Pages
 
 		public class WikipediaSelectors
 		{
-			public readonly By logoTitle = By.Id("js-link-box-en");
+			public readonly By logoTitle = By.CssSelector("#central-textlogo-wrapper div");
 
 		}
 	}
