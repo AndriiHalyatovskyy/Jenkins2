@@ -19,7 +19,7 @@ namespace Jenkins2.Tests
 		{
 			Pages.Goole.DoSearch("wikipedia");
 			Pages.SearchResult.OpenSiteByTitle("wikipedia");
-			Assert.IsTrue(Pages.Wikipedia.getTitleText().Contains("Wikipedia"));
+			Assert.IsTrue(Pages.Wikipedia.getTitleText().Contains("English"));
 		}
 	}
 }
