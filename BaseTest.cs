@@ -16,9 +16,7 @@ namespace Jenkins2
 			{
 				if (driver == null)
 				{
-					DesiredCapabilities capabilities = new DesiredCapabilities();
-
-					driver = new RemoteWebDriver(capabilities);
+					driver = new ChromeDriver();
 					driver.Url = "https://www.google.com/";
 					driver.Manage().Window.Maximize();
 
