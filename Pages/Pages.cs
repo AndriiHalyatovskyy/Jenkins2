@@ -79,6 +79,16 @@ namespace Jenkins2.Pages
 			return driver.FindElement(element).Text;
 		}
 
+		public string getPageURL()
+		{
+			return driver.Url;
+		}
+
+		public string getPageTitle()
+		{
+			return driver.Title;
+		}
+
 		public void WaitForElementPresent(By element)
 		{
 			try

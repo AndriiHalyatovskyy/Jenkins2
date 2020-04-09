@@ -14,6 +14,16 @@ namespace Jenkins2.Pages
 			return page.getElementText(selectors.logoTitle);
 		}
 
+		public string getCurrentURL()
+		{
+			return page.getPageTitle();
+		}
+
+		public string getPageTitle()
+		{
+			return page.getPageTitle();
+		}
+
 		public class WikipediaSelectors
 		{
 			public readonly By logoTitle = By.Id("js-link-box-en");
