@@ -15,10 +15,6 @@ namespace Jenkins2.Pages
 			page.ClickByPartialName(selectors.resultBlockTitle, name);
 		}
 
-		public void OpenSiteByDescription(string name)
-		{
-			page.ClickByPartialName(selectors.resultBlockDescription, name);
-		}
 		public class SearchResultSelectors
 		{
 			public readonly By resultBlock = By.ClassName("g");

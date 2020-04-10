@@ -13,6 +13,7 @@ namespace Jenkins2.Pages
 		private Google google;
 		private SearchResult searchResult;
 		private Wikipedia wikipedia;
+		private YouTube youtube;
 
 		private const int defaultWait = 20;
 
@@ -35,6 +36,11 @@ namespace Jenkins2.Pages
 		public Wikipedia Wikipedia
 		{
 			get { return wikipedia ?? (wikipedia = new Wikipedia(this)); }
+		}
+
+		public YouTube YouTube
+		{
+			get { return youtube ?? (youtube = new YouTube(this)); }
 		}
 
 		public IWebElement Click(By element, ScrollOptions scroll = ScrollOptions.none, int scrollDistance = 50, bool scrollToTop = false)
@@ -100,6 +106,11 @@ namespace Jenkins2.Pages
 			}
 		}
 
+		public void switchToDefault()
+		{
+			driver.SwitchTo().DefaultContent();
+		}
+
 		public void WaitForEnabled(params By[] elements)
 		{
 			foreach (var element in elements)
@@ -114,6 +125,19 @@ namespace Jenkins2.Pages
 			}
 		}
 
+		public bool IsElementPresentByPartialName(By by, string name)
+		{
+
+			var el = getElements(by);
+			foreach (IWebElement elem in el)
+			{
+				if (elem.Text.ToLower().Contains(name.ToLower()))
+				{
+					return true;
+				}
+			}
+			return false;
+		}
 		public void ScrollToElement(By element, ScrollOptions scrollOption = ScrollOptions.none, int amountToScrollPast = 30, bool scrollToTop = false)
 		{
 			try
@@ -152,6 +176,23 @@ namespace Jenkins2.Pages
 				Clear(element);
 			}
 			driver.FindElement(element).SendKeys(text);
+		}
+
+		public bool IsElementPresent(By by)
+		{
+			try
+			{
+				driver.FindElement(by);
+				return true;
+			}
+			catch (NoSuchElementException)
+			{
+				return false;
+			}
+			catch (NoSuchWindowException)
+			{
+				return false;
+			}
 		}
 
 		public void Clear(By element)
