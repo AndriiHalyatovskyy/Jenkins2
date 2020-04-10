@@ -178,6 +178,11 @@ namespace Jenkins2.Pages
 			driver.FindElement(element).SendKeys(text);
 		}
 
+		public void submitForm(By by)
+		{
+			driver.FindElement(by).Submit();
+		}
+
 		public bool IsElementPresent(By by)
 		{
 			try

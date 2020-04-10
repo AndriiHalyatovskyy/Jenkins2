@@ -1,26 +1,29 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 
 namespace Jenkins2
 {
 	public abstract class BaseTest
 	{
-		private IWebDriver driver;
+		private IWebDriver _driver;
 		private Pages.Pages _pages;
+		private Browsers _browser;
 
+		public BaseTest(Browsers browser)
+		{
+			_browser = browser;
+		}
 		protected IWebDriver Driver
 		{
 			get
 			{
-				if (driver == null)
+				if (_driver == null)
 				{
-					driver = new ChromeDriver();
-					driver.Url = "https://www.google.com/";
-					driver.Manage().Window.Maximize();
-
+					_driver = WebDriverFactory.GetDriver(_browser);
+					_driver.Url = "https://www.google.com/";
+					_driver.Manage().Window.Maximize();
 				}
-				return driver;
+				return _driver;
 			}
 		}
 
@@ -31,8 +34,8 @@ namespace Jenkins2
 		[OneTimeTearDown]
 		public void FixtureTeardownTest()
 		{
-			if (driver != null)
-				driver.Quit();
+			if (_driver != null)
+				_driver.Quit();
 		}
 	}
 }

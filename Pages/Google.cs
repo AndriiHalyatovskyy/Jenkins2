@@ -12,7 +12,8 @@ namespace Jenkins2.Pages
 		public void DoSearch(string text)
 		{
 			page.TypeText(Selectors.searchInput, text);
-			page.Click(selectors.searchButton);
+			page.submitForm(selectors.searchInput);
+			//page.Click(selectors.searchButton);
 		}
 
 		public class GoogleSelectors

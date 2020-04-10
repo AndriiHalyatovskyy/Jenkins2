@@ -3,8 +3,15 @@
 namespace Jenkins2.Tests
 {
 	[Parallelizable]
+	[TestFixture(Browsers.Chrome)]
+	[TestFixture(Browsers.Firefox)]
+	[TestFixture(Browsers.IE)]
 	public class SimpleTest : BaseTest
 	{
+		public SimpleTest(Browsers browser) : base(browser)
+		{
+
+		}
 		[SetUp]
 		public void SetupTest()
 		{
