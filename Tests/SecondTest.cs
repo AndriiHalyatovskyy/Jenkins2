@@ -2,6 +2,7 @@
 
 namespace Jenkins2.Tests
 {
+	[Parallelizable]
 	public class SecondTest : BaseTest
 	{
 		
