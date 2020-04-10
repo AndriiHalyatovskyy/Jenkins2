@@ -10,6 +10,7 @@ namespace Jenkins2.Tests
 		{
 			Pages.Goole.DoSearch("Youtube");
 			Pages.SearchResult.OpenSiteByTitle("Youtube");
+			Assert.True(true);
 		}
 	}
 }
