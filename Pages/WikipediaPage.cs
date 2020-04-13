@@ -14,13 +14,13 @@ namespace Jenkins2.Pages
 		/// </summary>
 		public string GetTitleText()
 		{
-			return page.GetElementText(selectors.logoTitle);
+			return page.GetElementText(selectors.allSite);
 		}
 
 		public class WikipediaSelectors
 		{
 			public readonly By logoTitle = By.CssSelector(".central-textlogo__image.svg-Wikipedia_wordmark");
-
+			public readonly By allSite = By.Id("www-wikipedia-org");
 		}
 	}
 }
