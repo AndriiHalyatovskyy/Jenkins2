@@ -158,6 +158,11 @@ namespace Jenkins2.Pages
 			}
 		}
 
+		public string GetPageTitle()
+		{
+			return driver.Title;
+		}
+
 		/// <summary>
 		/// Attempts to use javascript to scroll to a particular element
 		/// </summary>

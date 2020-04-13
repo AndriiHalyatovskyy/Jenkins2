@@ -14,7 +14,7 @@ namespace Jenkins2.Pages
 		/// </summary>
 		public string GetTitleText()
 		{
-			return page.GetElementText(selectors.allSite);
+			return page.GetPageTitle();
 		}
 
 		public class WikipediaSelectors
