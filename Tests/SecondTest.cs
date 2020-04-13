@@ -6,11 +6,11 @@ namespace Jenkins2.Tests
 	public class SecondTest : BaseTest
 	{
 		[Test]
-		public void testMethod()
+		public void SecondTestMethod()
 		{
 			Pages.Goole.DoSearch("Youtube");
 			Pages.SearchResult.OpenSiteByTitle("Youtube");
-			Assert.True(true);
+			Assert.True(true, "SecondTestMethod failed line 13");
 		}
 	}
 }

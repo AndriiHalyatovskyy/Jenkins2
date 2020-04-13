@@ -20,14 +20,14 @@ namespace Jenkins2.Tests
 		{
 			Pages.Goole.DoSearch("wikipedia");
 			Pages.SearchResult.OpenSiteByTitle("wikipedia");
-			Assert.IsTrue(Pages.Wikipedia.GetTitleText().ToLower().Contains("wikipedia"));
+			Assert.IsTrue(Pages.Wikipedia.GetTitleText().ToLower().Contains("wikipedia"), "WikiTest failed");
 		}
 
 		[Test]
 		public void GoogleSeatchTest()
 		{
 			Pages.Goole.DoSearch("test");
-			Assert.True(true);
+			Assert.True(true, "GoogleSeatchTest failed");
 		}
 	}
 }
