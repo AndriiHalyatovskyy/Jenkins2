@@ -1,26 +1,21 @@
-﻿using NUnit.Framework;
+﻿using Jenkins2.Tests;
+using NUnit.Framework;
 using OpenQA.Selenium;
 
-[assembly: LevelOfParallelism(5)]
+[assembly: LevelOfParallelism(3)]
 namespace Jenkins2
 {
 	public abstract class BaseTest
 	{
 		private IWebDriver _driver;
 		private Pages.Pages _pages;
-		private Browsers _browser;
-
-		public BaseTest(Browsers browser)
-		{
-			_browser = browser;
-		}
 		protected IWebDriver Driver
 		{
 			get
 			{
 				if (_driver == null)
 				{
-					_driver = WebDriverFactory.GetDriver(_browser);
+					_driver = BuildConfiguration.GetDriver();
 					_driver.Url = "https://www.google.com/";
 					_driver.Manage().Window.Maximize();
 				}

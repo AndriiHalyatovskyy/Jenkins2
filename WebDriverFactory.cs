@@ -5,30 +5,22 @@ using OpenQA.Selenium.IE;
 
 namespace Jenkins2
 {
-	public class WebDriverFactory
+	public abstract class WebDriverFactory
 	{
 
-		public static IWebDriver GetDriver(Browsers browser)
+		public static IWebDriver GetDriver(string browser)
 		{
-			switch (browser)
+			switch (browser.ToLower())
 			{
-				case Browsers.Chrome:
+				case "chrome":
 					return new ChromeDriver();
-				case Browsers.Firefox:
+				case "firefox":
 					return new FirefoxDriver();
-				case Browsers.IE:
+				case "ie":
 					return new InternetExplorerDriver();
 				default:
 					return new ChromeDriver();
 			}
 		}
 	}
-
-	public enum Browsers
-	{
-		Chrome,
-		Firefox,
-		IE
-	}
-
 }
