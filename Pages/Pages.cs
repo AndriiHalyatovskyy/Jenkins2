@@ -10,10 +10,10 @@ namespace Jenkins2.Pages
 		public IWebDriver driver;
 		public WebDriverWait Wait;
 
-		private Google google;
-		private SearchResult searchResult;
-		private Wikipedia wikipedia;
-		private YouTube youtube;
+		private GooglePage google;
+		private SearchResultPage searchResult;
+		private WikipediaPage wikipedia;
+		private YouTubePage youtube;
 
 		private const int defaultWait = 20;
 
@@ -23,26 +23,45 @@ namespace Jenkins2.Pages
 			Wait = new WebDriverWait(driver, TimeSpan.FromSeconds(defaultWait));
 		}
 
-		public Google Goole
+		/// <summary>
+		/// Google home page
+		/// </summary>
+		public GooglePage Goole
 		{
-			get { return google ?? (google = new Google(this)); }
+			get { return google ?? (google = new GooglePage(this)); }
 		}
 
-		public SearchResult SearchResult
+		/// <summary>
+		/// Google search page
+		/// </summary>
+		public SearchResultPage SearchResult
 		{
-			get { return searchResult ?? (searchResult = new SearchResult(this)); }
+			get { return searchResult ?? (searchResult = new SearchResultPage(this)); }
 		}
 
-		public Wikipedia Wikipedia
+		/// <summary>
+		/// Wikipedia home page
+		/// </summary>
+		public WikipediaPage Wikipedia
 		{
-			get { return wikipedia ?? (wikipedia = new Wikipedia(this)); }
+			get { return wikipedia ?? (wikipedia = new WikipediaPage(this)); }
 		}
 
-		public YouTube YouTube
+		/// <summary>
+		/// YouTube home page
+		/// </summary>
+		public YouTubePage YouTube
 		{
-			get { return youtube ?? (youtube = new YouTube(this)); }
+			get { return youtube ?? (youtube = new YouTubePage(this)); }
 		}
 
+		/// <summary>
+		/// Waits for element to be present and visible and then clicks it
+		/// </summary>
+		/// <param name="element"></param>
+		/// <param name="scroll"></param>
+		/// <param name="scrollDistance"></param>
+		/// <param name="scrollToTop"></param>
 		public IWebElement Click(By element, ScrollOptions scroll = ScrollOptions.none, int scrollDistance = 50, bool scrollToTop = false)
 		{
 			WaitForElementPresent(element);
@@ -52,6 +71,10 @@ namespace Jenkins2.Pages
 			return JustClick(element);
 		}
 
+		/// <summary>
+		/// Just clicks an element. Does not wait for it to be present and visible.
+		/// </summary>
+		/// <param name="element"></param>
 		public IWebElement JustClick(By element)
 		{
 			var el = driver.FindElement(element);
@@ -59,11 +82,16 @@ namespace Jenkins2.Pages
 			return el;
 		}
 
+		/// <summary>
+		/// Clicks an element whichinner text contains specified value
+		/// </summary>
+		/// <param name="element"></param>
+		/// <param name="name"></param>
 		public void ClickByPartialName(By element, string name)
 		{
 			IWebElement res = null;
 			WaitForElementPresent(element);
-			var el = getElements(element);
+			var el = GetElements(element);
 			foreach (IWebElement elem in el)
 			{
 				if (elem.Text.ToLower().Contains(name.ToLower()))
@@ -79,22 +107,20 @@ namespace Jenkins2.Pages
 			}
 		}
 
-		public string getElementText(By element)
+		/// <summary>
+		/// Returns inner text of element
+		/// </summary>
+		/// <param name="element"></param>
+		public string GetElementText(By element)
 		{
 			WaitForElementPresent(element);
 			return driver.FindElement(element).Text;
 		}
 
-		public string getPageURL()
-		{
-			return driver.Url;
-		}
-
-		public string getPageTitle()
-		{
-			return driver.Title;
-		}
-
+		/// <summary>
+		/// Waits untill element is not present on page
+		/// </summary>
+		/// <param name="element"></param>
 		public void WaitForElementPresent(By element)
 		{
 			try
@@ -106,11 +132,18 @@ namespace Jenkins2.Pages
 			}
 		}
 
-		public void switchToDefault()
+		/// <summary>
+		/// Swithes driver to first frame on page
+		/// </summary>
+		public void SwitchToDefault()
 		{
 			driver.SwitchTo().DefaultContent();
 		}
 
+		/// <summary>
+		/// Waits for the element to be enabled and clickable
+		/// </summary>
+		/// <param name="elements"></param>
 		public void WaitForEnabled(params By[] elements)
 		{
 			foreach (var element in elements)
@@ -125,19 +158,13 @@ namespace Jenkins2.Pages
 			}
 		}
 
-		public bool IsElementPresentByPartialName(By by, string name)
-		{
-
-			var el = getElements(by);
-			foreach (IWebElement elem in el)
-			{
-				if (elem.Text.ToLower().Contains(name.ToLower()))
-				{
-					return true;
-				}
-			}
-			return false;
-		}
+		/// <summary>
+		/// Attempts to use javascript to scroll to a particular element
+		/// </summary>
+		/// <param name="element">By element</param>
+		/// <param name="scrollOption">Scroll option</param>
+		/// <param name="amountToScrollPast">Scroll past the element by 30 pixels in the indicated direction (to avoid floating elements)</param>
+		/// <param name="scrollToTop">true = scroll to top, false (default) = scroll to bottom</param>
 		public void ScrollToElement(By element, ScrollOptions scrollOption = ScrollOptions.none, int amountToScrollPast = 30, bool scrollToTop = false)
 		{
 			try
@@ -163,11 +190,21 @@ namespace Jenkins2.Pages
 			}
 		}
 
-		public ReadOnlyCollection<IWebElement> getElements(By selector)
+		/// <summary>
+		/// Returns all elements which was finded by selector
+		/// </summary>
+		/// <param name="selector"></param>
+		public ReadOnlyCollection<IWebElement> GetElements(By selector)
 		{
 			return driver.FindElements(selector);
 		}
 
+		/// <summary>
+		/// Types specified text into input
+		/// </summary>
+		/// <param name="element"></param>
+		/// <param name="text"></param>
+		/// <param name="clear"></param>
 		public void TypeText(By element, string text, bool clear = true)
 		{
 			WaitForElementPresent(element);
@@ -178,11 +215,19 @@ namespace Jenkins2.Pages
 			driver.FindElement(element).SendKeys(text);
 		}
 
-		public void submitForm(By by)
+		/// <summary>
+		/// Sends information from form to server
+		/// </summary>
+		/// <param name="by"></param>
+		public void SubmitForm(By by)
 		{
 			driver.FindElement(by).Submit();
 		}
 
+		/// <summary>
+		/// Checks if element is present
+		/// </summary>
+		/// <param name="by"></param>
 		public bool IsElementPresent(By by)
 		{
 			try
@@ -200,11 +245,18 @@ namespace Jenkins2.Pages
 			}
 		}
 
+		/// <summary>
+		/// Clears input
+		/// </summary>
+		/// <param name="element"></param>
 		public void Clear(By element)
 		{
 			driver.FindElement(element).Clear();
 		}
 
+		/// <summary>
+		/// Options for scroll direction
+		/// </summary>
 		public enum ScrollOptions
 		{
 			none,

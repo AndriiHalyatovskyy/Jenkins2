@@ -2,8 +2,8 @@
 
 namespace Jenkins2.Tests
 {
-	[Parallelizable]
-	public class SimpleTest : BaseTest
+	[TestFixture]
+	public class FirstTest : BaseTest
 	{
 		[SetUp]
 		public void SetupTest()
@@ -20,8 +20,14 @@ namespace Jenkins2.Tests
 		{
 			Pages.Goole.DoSearch("wikipedia");
 			Pages.SearchResult.OpenSiteByTitle("wikipedia");
-			Assert.IsTrue(Pages.Wikipedia.getPageTitle().ToLower().Contains("Wikipedia".ToLower()));
-			Assert.True(Pages.Wikipedia.getPageTitle().ToLower().Contains("wiki"));
+			Assert.IsTrue(Pages.Wikipedia.GetTitleText().ToLower().Contains("wikipedia"));
+		}
+
+		[Test]
+		public void GoogleSeatchTest()
+		{
+			Pages.Goole.DoSearch("test");
+			Assert.True(true);
 		}
 	}
 }

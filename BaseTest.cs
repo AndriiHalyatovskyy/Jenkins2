@@ -2,7 +2,6 @@
 using NUnit.Framework;
 using OpenQA.Selenium;
 
-[assembly: LevelOfParallelism(3)]
 namespace Jenkins2
 {
 	public abstract class BaseTest

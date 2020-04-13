@@ -2,7 +2,7 @@
 
 namespace Jenkins2.Tests
 {
-	[Parallelizable]
+	[TestFixture]
 	public class SecondTest : BaseTest
 	{
 		[Test]

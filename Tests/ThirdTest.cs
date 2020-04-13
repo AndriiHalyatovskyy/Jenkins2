@@ -2,7 +2,6 @@
 
 namespace Jenkins2.Tests
 {
-	[Parallelizable]
 	public class ThirdTest : BaseTest
 	{
 		[Test]
@@ -10,8 +9,8 @@ namespace Jenkins2.Tests
 		{
 			Pages.Goole.DoSearch("wikipedia");
 			Pages.SearchResult.OpenSiteByTitle("wikipedia");
-			Assert.IsTrue(Pages.Wikipedia.getPageTitle().ToLower().Contains("Wikipedia".ToLower()));
-			Assert.True(Pages.Wikipedia.getPageTitle().ToLower().Contains("wiki"));
+			Assert.IsTrue(Pages.Wikipedia.GetTitleText().ToLower().Contains("Wikipedia".ToLower()));
+			Assert.True(Pages.Wikipedia.GetTitleText().ToLower().Contains("wiki"));
 		}
 	}
 }
