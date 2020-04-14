@@ -5,15 +5,6 @@ namespace Jenkins2.Tests
 	[TestFixture]
 	public class FirstTest : BaseTest
 	{
-		[SetUp]
-		public void SetupTest()
-		{
-		}
-
-		[TearDown]
-		public void TeardownTest()
-		{
-		}
 
 		[Test]
 		public void WikiTest()
@@ -33,7 +24,8 @@ namespace Jenkins2.Tests
 		[Test]
 		public void FailedTest()
 		{
-			Assert.True(false);
+			Pages.Goole.DoSearch("Fail");
+			Assert.True(false, "Expect True, but was false");
 		}
 	}
 }

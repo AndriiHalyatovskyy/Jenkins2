@@ -1,14 +1,13 @@
 ﻿using Jenkins2.Tests;
-using log4net;
 using NUnit.Framework;
+using NUnit.Framework.Interfaces;
 using OpenQA.Selenium;
-using System;
-using System.Reflection;
 
 namespace Jenkins2
 {
-	public abstract class BaseTest
+	public abstract class BaseTest : Helper
 	{
+
 		private IWebDriver _driver;
 		private Pages.Pages _pages;
 		protected IWebDriver Driver
@@ -39,7 +38,18 @@ namespace Jenkins2
 		public void SetUp()
 		{
 			//Logger.Logger.GetLogger.Error(this.GetType().UnderlyingSystemType.Name);
-			Logger.Logger.GetLogger.Error("My Message");
+			//Logger.Logger.GetLogger.Error(NUnit.Framework.TestContext.CurrentContext);
+			TakeVideo($"{TestContext.CurrentContext.Test.ClassName}_{TestContext.CurrentContext.Test.Name}");
+		}
+
+		[TearDown]
+		public void TearDown()
+		{
+			if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed)
+			{
+				TakeScreenshot(_driver, $"{TestContext.CurrentContext.Test.ClassName}_{TestContext.CurrentContext.Test.Name}");				
+			}
+			StopRecording();
 		}
 
 		[OneTimeTearDown]
