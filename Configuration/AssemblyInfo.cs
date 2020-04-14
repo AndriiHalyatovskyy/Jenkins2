@@ -35,6 +35,6 @@ using System.Runtime.InteropServices;
 
 //Settings for NUNit
 //Limit of maximum thread
-[assembly: LevelOfParallelism(4)]
+[assembly: LevelOfParallelism(1)]
 //Allow tests fixtures to run parallel
 [assembly: Parallelizable(ParallelScope.Fixtures)]

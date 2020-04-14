@@ -17,8 +17,8 @@ namespace Jenkins2
 				if (_driver == null)
 				{
 					_driver = BuildConfiguration.GetDriver();
-					_driver.Url = "https://www.google.com/";
 					_driver.Manage().Window.Maximize();
+					_driver.Url = "https://www.google.com/";
 				}
 				return _driver;
 			}
@@ -45,11 +45,11 @@ namespace Jenkins2
 		[TearDown]
 		public void TearDown()
 		{
+			StopRecording(TestContext.CurrentContext);
 			if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed)
 			{
 				TakeScreenshot(_driver, $"{TestContext.CurrentContext.Test.ClassName}_{TestContext.CurrentContext.Test.Name}");				
 			}
-			StopRecording();
 		}
 
 		[OneTimeTearDown]
