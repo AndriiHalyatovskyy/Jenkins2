@@ -29,5 +29,11 @@ namespace Jenkins2.Tests
 			Pages.Goole.DoSearch("test");
 			Assert.True(true, "GoogleSeatchTest failed");
 		}
+
+		[Test]
+		public void FailedTest()
+		{
+			Assert.True(false);
+		}
 	}
 }

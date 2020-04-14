@@ -1,6 +1,9 @@
 ﻿using Jenkins2.Tests;
+using log4net;
 using NUnit.Framework;
 using OpenQA.Selenium;
+using System;
+using System.Reflection;
 
 namespace Jenkins2
 {
@@ -25,6 +28,19 @@ namespace Jenkins2
 		protected Pages.Pages Pages => _pages ?? (_pages = new Pages.Pages(
 				driver: Driver));
 
+
+		[OneTimeSetUp]
+		public void OneTimeSetupTest()
+		{
+			Logger.Logger.InitLogger();
+		}
+
+		[SetUp]
+		public void SetUp()
+		{
+			//Logger.Logger.GetLogger.Error(this.GetType().UnderlyingSystemType.Name);
+			Logger.Logger.GetLogger.Error("My Message");
+		}
 
 		[OneTimeTearDown]
 		public void FixtureTeardownTest()
