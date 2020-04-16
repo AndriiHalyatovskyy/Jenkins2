@@ -45,7 +45,7 @@ namespace Jenkins2
 		/// Takes video and save it to current directory
 		/// </summary>
 		/// <param name="methodName"></param>
-		protected void TakeVideo(string methodName)
+		protected void TakeVideo()
 		{
 				recorder = new ScreenCaptureJob();
 				var path = $"{TestContext.CurrentContext.TestDirectory}\\Videos\\{DateTime.UtcNow:MMM'-'dd'-'yy}\\";
@@ -58,7 +58,7 @@ namespace Jenkins2
 					destinationDirectory.Create();
 				}
 
-				filepath = $"{path}{methodName}_{DateTime.UtcNow.Ticks}.mp4";
+				filepath = $"{path}TEST_{DateTime.UtcNow.Ticks}.mp4";
 
 				area = SystemInformation.WorkingArea.Size;
 				rect = new Rectangle(0, 0, area.Width - (area.Width % 4), area.Height - (area.Width % 4)); //Removes startup menu
