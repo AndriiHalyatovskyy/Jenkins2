@@ -5,7 +5,6 @@ using OpenQA.Selenium;
 using System;
 using System.Drawing;
 using System.IO;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Jenkins2
@@ -14,6 +13,8 @@ namespace Jenkins2
 	{
 		private ScreenCaptureJob recorder;
 		private string filepath;
+		private Size area;
+		Rectangle rect;
 
 		/// <summary>
 		/// Takes screenshot of browser and save to current directory
@@ -54,8 +55,8 @@ namespace Jenkins2
 
 				filepath = $"{path}{methodName}_{DateTime.UtcNow.Ticks}.mp4";
 
-				Size area = SystemInformation.WorkingArea.Size;
-				Rectangle rect = new Rectangle(0, 0, area.Width - (area.Width % 4), area.Height - (area.Width % 4)); //Removes startup menu
+				area = SystemInformation.WorkingArea.Size;
+				rect = new Rectangle(0, 0, area.Width - (area.Width % 4), area.Height - (area.Width % 4)); //Removes startup menu
 
 				recorder.OutputScreenCaptureFileName = filepath;
 				recorder.CaptureRectangle = rect;
