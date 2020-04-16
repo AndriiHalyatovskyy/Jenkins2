@@ -39,16 +39,16 @@ namespace Jenkins2
 		{
 			//Logger.Logger.GetLogger.Error(this.GetType().UnderlyingSystemType.Name);
 			//Logger.Logger.GetLogger.Error(NUnit.Framework.TestContext.CurrentContext);
-			//TakeVideo($"{TestContext.CurrentContext.Test.ClassName}_{TestContext.CurrentContext.Test.Name}");
+			TakeVideo($"{TestContext.CurrentContext.Test.ClassName}_{TestContext.CurrentContext.Test.Name}");
 		}
 
 		[TearDown]
 		public void TearDown()
 		{
-			//StopRecording(TestContext.CurrentContext);
+			StopRecording(TestContext.CurrentContext);
 			if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed)
 			{
-				TakeScreenshot(_driver, $"{TestContext.CurrentContext.Test.ClassName}_{TestContext.CurrentContext.Test.Name}");				
+				TakeScreenshot(_driver, $"{TestContext.CurrentContext.Test.ClassName}_{TestContext.CurrentContext.Test.Name}");
 			}
 		}
 

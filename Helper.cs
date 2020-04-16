@@ -14,7 +14,7 @@ namespace Jenkins2
 		private ScreenCaptureJob recorder;
 		private string filepath;
 		private Size area;
-		Rectangle rect;
+		private Rectangle rect;
 
 		/// <summary>
 		/// Takes screenshot of browser and save to current directory
@@ -34,6 +34,11 @@ namespace Jenkins2
 			}
 
 			((ITakesScreenshot)driver).GetScreenshot().SaveAsFile(path, ScreenshotImageFormat.Png);
+		}
+
+		protected void Test()
+		{
+
 		}
 
 		/// <summary>
