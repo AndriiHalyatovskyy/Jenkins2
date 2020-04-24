@@ -41,7 +41,7 @@ namespace Jenkins2
 		/// Takes video and save it to current directory
 		/// </summary>
 		/// <param name="methodName"></param>
-		protected async void TakeVideo(IWebDriver driver, string methodName)
+		protected async void TakeVideo(string methodName)
 		{
 			string subfolderPath = $"{TestContext.CurrentContext.TestDirectory}\\Video\\{DateTime.UtcNow:MMM'-'dd'-'yy}\\";
 			string path = $"{subfolderPath}{methodName}_{DateTime.UtcNow.Ticks}.mp4";
