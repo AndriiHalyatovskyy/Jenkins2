@@ -54,7 +54,7 @@ namespace Jenkins2
 			}
 
 			vf = new VideoFileWriter();
-			vf.Open(path, 1920, 1080, 25, VideoCodec.MPEG4, 100000);
+			vf.Open(path, 1920, 1080, 30, VideoCodec.MPEG4, 100000);
 
 			await Task.Run(() =>
 			{
@@ -62,7 +62,7 @@ namespace Jenkins2
 				{
 					bp = new Bitmap(1920, 1080);
 					gr = Graphics.FromImage(bp);
-					gr.CopyFromScreen(0, 0, 0, 0, bp.Size);
+					gr.CopyFromScreen(0, 0, 0, 0, bp.Size, CopyPixelOperation.MergeCopy);
 					vf.WriteVideoFrame(bp);
 					Thread.Sleep(30);
 				}
