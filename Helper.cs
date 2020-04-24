@@ -54,16 +54,15 @@ namespace Jenkins2
 			}
 
 			vf = new VideoFileWriter();
-			vf.Open(path, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, 25, VideoCodec.MPEG4, 100000);
+			vf.Open(path, 1920, 1080, 25, VideoCodec.MPEG4, 100000);
 
 			await Task.Run(() =>
 			{
-				while (true)
+				while (vf.IsOpen)
 				{
-					bp = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
+					bp = new Bitmap(1920, 1080);
 					gr = Graphics.FromImage(bp);
 					gr.CopyFromScreen(0, 0, 0, 0, bp.Size);
-					bp.Save($"{TestContext.CurrentContext.TestDirectory}\\Video\\Text.png");
 					vf.WriteVideoFrame(bp);
 					Thread.Sleep(30);
 				}
