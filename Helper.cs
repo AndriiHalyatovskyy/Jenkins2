@@ -13,7 +13,6 @@ namespace Jenkins2
 {
 	public abstract class Helper
 	{
-		private string filepath;
 		private VideoFileWriter vf;
 		private Bitmap bp;
 		private Graphics gr;
@@ -64,6 +63,7 @@ namespace Jenkins2
 					bp = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
 					gr = Graphics.FromImage(bp);
 					gr.CopyFromScreen(0, 0, 0, 0, bp.Size);
+					bp.Save($"{TestContext.CurrentContext.TestDirectory}\\Video\\Text.png");
 					vf.WriteVideoFrame(bp);
 					Thread.Sleep(30);
 				}
@@ -75,10 +75,10 @@ namespace Jenkins2
 		/// </summary>
 		protected void StopRecording(TestContext context)
 		{
-			if (context.Result.Outcome.Status != TestStatus.Failed)
-			{
-				File.Delete(filepath);
-			}
+			//if (context.Result.Outcome.Status != TestStatus.Failed)
+			//{
+			//	File.Delete(filepath);
+			//}
 			vf.Close();
 		}
 	}
