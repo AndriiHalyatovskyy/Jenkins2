@@ -41,7 +41,7 @@ namespace Jenkins2
 		/// Takes video and save it to current directory
 		/// </summary>
 		/// <param name="methodName"></param>
-		protected async void TakeVideo(string methodName)
+		protected async void TakeVideo(IWebDriver driver, string methodName)
 		{
 			string subfolderPath = $"{TestContext.CurrentContext.TestDirectory}\\Video\\{DateTime.UtcNow:MMM'-'dd'-'yy}\\";
 			string path = $"{subfolderPath}{methodName}_{DateTime.UtcNow.Ticks}.mp4";
@@ -58,7 +58,7 @@ namespace Jenkins2
 
 			await Task.Run(() =>
 			{
-				while (vf.IsOpen)
+				while (true)
 				{
 					bp = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
 					gr = Graphics.FromImage(bp);
