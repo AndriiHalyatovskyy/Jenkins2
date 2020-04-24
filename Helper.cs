@@ -62,7 +62,7 @@ namespace Jenkins2
 				{
 					bp = new Bitmap(1920, 1080);
 					gr = Graphics.FromImage(bp);
-					gr.CopyFromScreen(0, 0, 0, 0, bp.Size, CopyPixelOperation.NotSourceErase);
+					gr.CopyFromScreen(0, 0, 0, 0, bp.Size, CopyPixelOperation.PatCopy);
 					vf.WriteVideoFrame(bp);
 					Thread.Sleep(30);
 				}
