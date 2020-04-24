@@ -39,16 +39,17 @@ namespace Jenkins2
 		{
 			//Logger.Logger.GetLogger.Error(this.GetType().UnderlyingSystemType.Name);
 			//Logger.Logger.GetLogger.Error(NUnit.Framework.TestContext.CurrentContext);
-			TakeVideo();
+			//TakeVideo();
+			Test();
 		}
 
 		[TearDown]
 		public void TearDown()
 		{
-			StopRecording(TestContext.CurrentContext);
+			//StopRecording(TestContext.CurrentContext);
 			if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed)
 			{
-				TakeScreenshot(_driver, $"{TestContext.CurrentContext.Test.ClassName}_{TestContext.CurrentContext.Test.Name}");
+				//TakeScreenshot(_driver, $"{TestContext.CurrentContext.Test.ClassName}_{TestContext.CurrentContext.Test.Name}");
 			}
 		}
 
@@ -57,6 +58,7 @@ namespace Jenkins2
 		{
 			if (_driver != null)
 				_driver.Quit();
+			//stope();
 		}
 	}
 }
