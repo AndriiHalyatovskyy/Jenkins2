@@ -45,7 +45,8 @@ namespace Jenkins2
 		[TearDown]
 		public void TearDown()
 		{
-			StopRecording(TestContext.CurrentContext);
+			EndRecording();
+		//StopRecording(TestContext.CurrentContext);
 			if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed)
 			{
 				TakeScreenshot(_driver, $"{TestContext.CurrentContext.Test.ClassName}_{TestContext.CurrentContext.Test.Name}");
