@@ -53,7 +53,7 @@ namespace Jenkins2
 
 			filepath = $"{path}{methodName}_{DateTime.UtcNow.Ticks}.mp4";
 
-			Size area = SystemInformation.PrimaryMonitorMaximizedWindowSize;
+			Size area = SystemInformation.PrimaryMonitorSize;
 			Rectangle rect = new Rectangle(0, 0, area.Width - (area.Width % 4), area.Height - (area.Width % 4)); //Removes startup menu
 
 			recorder.OutputScreenCaptureFileName = filepath;
