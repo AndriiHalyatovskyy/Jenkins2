@@ -74,7 +74,7 @@ namespace Jenkins2
 			}
 			if (context.Result.Outcome.Status != TestStatus.Failed)
 			{
-				File.Delete(filepath);
+				//File.Delete(filepath);
 			}
 		}
 	}
