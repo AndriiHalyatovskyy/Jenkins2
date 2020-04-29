@@ -40,26 +40,26 @@ namespace Jenkins2
 		/// <param name="methodName"></param>
 		protected void TakeVideo(string methodName)
 		{
-				recorder = new ScreenCaptureJob();
-				var path = $"{TestContext.CurrentContext.TestDirectory}\\Videos\\{DateTime.UtcNow:MMM'-'dd'-'yy}\\";
+			recorder = new ScreenCaptureJob();
+			var path = $"{TestContext.CurrentContext.TestDirectory}\\Videos\\{DateTime.UtcNow:MMM'-'dd'-'yy}\\";
 
 
-				var destinationDirectory = new DirectoryInfo(Path.GetDirectoryName(path));
+			var destinationDirectory = new DirectoryInfo(Path.GetDirectoryName(path));
 
-				if (!destinationDirectory.Exists)
-				{
-					destinationDirectory.Create();
-				}
+			if (!destinationDirectory.Exists)
+			{
+				destinationDirectory.Create();
+			}
 
-				filepath = $"{path}{methodName}_{DateTime.UtcNow.Ticks}.mp4";
+			filepath = $"{path}{methodName}_{DateTime.UtcNow.Ticks}.mp4";
 
-				Size area = SystemInformation.WorkingArea.Size;
-				Rectangle rect = new Rectangle(0, 0, area.Width - (area.Width % 4), area.Height - (area.Width % 4)); //Removes startup menu
+			Size area = SystemInformation.PrimaryMonitorMaximizedWindowSize;
+			Rectangle rect = new Rectangle(0, 0, area.Width - (area.Width % 4), area.Height - (area.Width % 4)); //Removes startup menu
 
-				recorder.OutputScreenCaptureFileName = filepath;
-				recorder.CaptureRectangle = rect;
-				recorder.OutputPath = path;
-				recorder.Start();
+			recorder.OutputScreenCaptureFileName = filepath;
+			recorder.CaptureRectangle = rect;
+			recorder.OutputPath = path;
+			recorder.Start();
 		}
 
 		/// <summary>
