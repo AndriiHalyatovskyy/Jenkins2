@@ -53,7 +53,9 @@ namespace Jenkins2
 		{
 			Logger.Logger.GetLogger.Info($"Test {TestContext.CurrentContext.Test.MethodName} finished with status " +
 				$"{TestContext.CurrentContext.Result.Outcome.Status}, Message: {TestContext.CurrentContext.Result.Message}");
+
 			StopRecording(TestContext.CurrentContext);
+
 			if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed)
 			{
 				TakeScreenshot(_driver, $"{TestContext.CurrentContext.Test.ClassName}_{TestContext.CurrentContext.Test.Name}");				

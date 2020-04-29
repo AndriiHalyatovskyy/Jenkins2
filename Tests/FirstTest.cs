@@ -1,8 +1,10 @@
-﻿using NUnit.Framework;
+﻿using NUnit.Allure.Core;
+using NUnit.Framework;
 
 namespace Jenkins2.Tests
 {
 	[TestFixture]
+	[AllureNUnit]
 	public class FirstTest : BaseTest
 	{
 
