@@ -1,25 +1,19 @@
-﻿using Accord.Video.FFMPEG;
+﻿using Microsoft.Expression.Encoder.ScreenCapture;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
 using OpenQA.Selenium;
 using System;
 using System.Drawing;
 using System.IO;
-using System.Threading;
 using System.Threading.Tasks;
-using ScreenRecorderLib;
+using System.Windows.Forms;
 
 namespace Jenkins2
 {
 	public abstract class Helper
 	{
-		private VideoFileWriter vf;
-		private Bitmap bp;
-		private Graphics gr;
+		private ScreenCaptureJob recorder;
 		private string filepath;
-
-		private Recorder _rec;
-		private Stream _outStream;
 
 		/// <summary>
 		/// Takes screenshot of browser and save to current directory
@@ -45,65 +39,28 @@ namespace Jenkins2
 		/// Takes video and save it to current directory
 		/// </summary>
 		/// <param name="methodName"></param>
-		//protected async void TakeVideo(string methodName)
-		//{
-		//	string subfolderPath = $"{TestContext.CurrentContext.TestDirectory}\\Video\\{DateTime.UtcNow:MMM'-'dd'-'yy}\\";
-		//	string path = $"{subfolderPath}{methodName}_{DateTime.UtcNow.Ticks}.mp4";
-		//	filepath = path;
-		//	var destinationDirectory = new DirectoryInfo(Path.GetDirectoryName(subfolderPath));
-
-		//	if (!destinationDirectory.Exists)
-		//	{
-		//		destinationDirectory.Create();
-		//	}
-
-		//	vf = new VideoFileWriter();
-		//	vf.Open(path, 1920, 1080, 30, VideoCodec.MPEG4, 100000);
-
-		//	await Task.Run(() =>
-		//	{ 
-		//		while (vf.IsOpen)
-		//		{
-		//			bp = new Bitmap(1920, 1080);
-		//			gr = Graphics.FromImage(bp);
-		//			gr.CopyFromScreen(0, 0, 0, 0, bp.Size);
-		//			vf.WriteVideoFrame(bp);
-		//			Thread.Sleep(30);
-		//		}
-		//	});
-		//}
-
 		protected void TakeVideo(string methodName)
 		{
-			string subfolderPath = $"{TestContext.CurrentContext.TestDirectory}\\Video\\{DateTime.UtcNow:MMM'-'dd'-'yy}\\";
-			string path = $"{subfolderPath}{methodName}_{DateTime.UtcNow.Ticks}.mp4";
-			filepath = path;
-			var destinationDirectory = new DirectoryInfo(Path.GetDirectoryName(subfolderPath));
+				recorder = new ScreenCaptureJob();
+				var path = $"{TestContext.CurrentContext.TestDirectory}\\Videos\\{DateTime.UtcNow:MMM'-'dd'-'yy}\\";
 
-			if (!destinationDirectory.Exists)
-			{
-				destinationDirectory.Create();
-			}
 
-			_rec = Recorder.CreateRecorder();
-			_rec.OnRecordingComplete += Rec_OnRecordingComplete;
-			_rec.OnRecordingFailed += Rec_OnRecordingFailed;
+				var destinationDirectory = new DirectoryInfo(Path.GetDirectoryName(path));
 
-			_rec.Record(path);
-		}
+				if (!destinationDirectory.Exists)
+				{
+					destinationDirectory.Create();
+				}
 
-		protected void EndRecording()
-		{
-			_rec.Stop();
-		}
-		private void Rec_OnRecordingComplete(object sender, RecordingCompleteEventArgs e)
-		{
-			_outStream?.Dispose();
-		}
-		private void Rec_OnRecordingFailed(object sender, RecordingFailedEventArgs e)
-		{
-			_outStream?.Dispose();
+				filepath = $"{path}{methodName}_{DateTime.UtcNow.Ticks}.mp4";
 
+				Size area = SystemInformation.WorkingArea.Size;
+				Rectangle rect = new Rectangle(0, 0, area.Width - (area.Width % 4), area.Height - (area.Width % 4)); //Removes startup menu
+
+				recorder.OutputScreenCaptureFileName = filepath;
+				recorder.CaptureRectangle = rect;
+				recorder.OutputPath = path;
+				recorder.Start();
 		}
 
 		/// <summary>
@@ -111,12 +68,15 @@ namespace Jenkins2
 		/// </summary>
 		protected void StopRecording(TestContext context)
 		{
-			//vf.Close();
+			if (recorder.Status == RecordStatus.Running)
+			{
+				recorder.Stop();
+				recorder.Dispose();
+			}
 			if (context.Result.Outcome.Status != TestStatus.Failed)
 			{
 				File.Delete(filepath);
 			}
-
 		}
 	}
 }
