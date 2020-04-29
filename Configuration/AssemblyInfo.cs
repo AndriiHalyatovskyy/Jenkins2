@@ -1,6 +1,5 @@
 ﻿using NUnit.Framework;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
@@ -8,7 +7,7 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 [assembly: AssemblyTitle("Jenkins2")]
 [assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyConfiguration("debug")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Jenkins2")]
 [assembly: AssemblyCopyright("Copyright ©  2020")]
