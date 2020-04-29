@@ -39,11 +39,6 @@ namespace Jenkins2
 		[OneTimeSetUp]
 		public void OneTimeSetupTest()
 		{
-
-			Environment.SetEnvironmentVariable(
-			   AllureConstants.ALLURE_CONFIG_ENV_VARIABLE,
-			   Path.Combine(Environment.CurrentDirectory, AllureConstants.CONFIG_FILENAME));
-
 			Logger.Logger.InitLogger();
 			SetOutputLogFileName(TestContext.CurrentContext.Test.ClassName);
 		}

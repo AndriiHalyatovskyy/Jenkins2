@@ -1,6 +1,5 @@
 ﻿using log4net.Appender;
 using log4net.Core;
-using log4net.Repository.Hierarchy;
 using Microsoft.Expression.Encoder.ScreenCapture;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
@@ -8,13 +7,14 @@ using OpenQA.Selenium;
 using System;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace Jenkins2
 {
 	public abstract class Helper
 	{
+		private Size area;
+		private Rectangle rect;
 		private ScreenCaptureJob recorder;
 		private string filepath;
 
@@ -57,8 +57,8 @@ namespace Jenkins2
 
 			filepath = $"{path}{methodName}_{DateTime.UtcNow.Ticks}.mp4";
 
-			Size area = SystemInformation.WorkingArea.Size;
-			Rectangle rect = new Rectangle(0, 0, area.Width - (area.Width % 4), area.Height - (area.Width % 4)); //Removes startup menu
+			area = SystemInformation.WorkingArea.Size;
+			rect = new Rectangle(0, 0, area.Width - (area.Width % 4), area.Height - (area.Width % 4)); //Removes startup menu
 
 			recorder.OutputScreenCaptureFileName = filepath;
 			recorder.CaptureRectangle = rect;
@@ -87,15 +87,8 @@ namespace Jenkins2
 		{
 			foreach (FileAppender appender in LoggerManager.GetAllRepositories()[0].GetAppenders())
 			{
-				try
-				{
-					appender.File = $"Logs\\{fileName}.log";
-					appender.ActivateOptions();
-				}
-				catch (Exception ex)
-				{
-					Console.WriteLine(ex.Message);
-				}
+				appender.File = $"Logs\\{fileName}.log";
+				appender.ActivateOptions();
 			}
 		}
 
