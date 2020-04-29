@@ -1,0 +1,76 @@
+{
+  "uuid": "681c9ffe-5071-49d9-99bb-268e284e4ff0-tc-0-1006",
+  "name": "Jenkins2.Tests.ThirdTest.ThirdTestMethod",
+  "children": [
+    "ef50c854-befd-4c5a-b326-9de147ed6493-tr-0-1007"
+  ],
+  "befores": [
+    {
+      "name": "OneTimeSetupTest",
+      "status": "passed",
+      "statusDetails": {
+        "known": false,
+        "muted": false,
+        "flaky": false
+      },
+      "stage": "finished",
+      "steps": [],
+      "attachments": [],
+      "parameters": [],
+      "start": 1588163268258,
+      "stop": 1588163268258
+    },
+    {
+      "name": "SetUp",
+      "status": "passed",
+      "statusDetails": {
+        "known": false,
+        "muted": false,
+        "flaky": false
+      },
+      "stage": "finished",
+      "steps": [],
+      "attachments": [],
+      "parameters": [],
+      "start": 1588163268261,
+      "stop": 1588163268261
+    }
+  ],
+  "afters": [
+    {
+      "name": "TearDown",
+      "status": "passed",
+      "statusDetails": {
+        "known": false,
+        "muted": false,
+        "flaky": false
+      },
+      "stage": "finished",
+      "steps": [],
+      "attachments": [],
+      "parameters": [],
+      "start": 1588163268261,
+      "stop": 1588163268261
+    },
+    {
+      "name": "FixtureTeardownTest",
+      "status": "none",
+      "statusDetails": {
+        "known": false,
+        "muted": false,
+        "flaky": false,
+        "message": "It's not possible to get status of OneTimeTearDown",
+        "trace": "See Allure.NUnit wiki"
+      },
+      "stage": "finished",
+      "steps": [],
+      "attachments": [],
+      "parameters": [],
+      "start": 1588163268261,
+      "stop": 1588163268261
+    }
+  ],
+  "links": [],
+  "start": 1588163257515,
+  "stop": 1588163268329
+}

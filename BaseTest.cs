@@ -1,10 +1,13 @@
-﻿using Jenkins2.Tests;
+﻿using Allure.Commons;
+using Jenkins2.Tests;
 using log4net.Core;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 using NUnit.Framework.Interfaces;
 using NUnit.Framework.Internal;
 using OpenQA.Selenium;
+using System;
+using System.IO;
 using System.Reflection.Emit;
 using System.Runtime.ExceptionServices;
 
@@ -36,6 +39,11 @@ namespace Jenkins2
 		[OneTimeSetUp]
 		public void OneTimeSetupTest()
 		{
+
+			Environment.SetEnvironmentVariable(
+			   AllureConstants.ALLURE_CONFIG_ENV_VARIABLE,
+			   Path.Combine(Environment.CurrentDirectory, AllureConstants.CONFIG_FILENAME));
+
 			Logger.Logger.InitLogger();
 			SetOutputLogFileName(TestContext.CurrentContext.Test.ClassName);
 		}
