@@ -1,7 +1,12 @@
 ﻿using Jenkins2.Tests;
+using log4net.Core;
 using NUnit.Framework;
+using NUnit.Framework.Constraints;
 using NUnit.Framework.Interfaces;
+using NUnit.Framework.Internal;
 using OpenQA.Selenium;
+using System.Reflection.Emit;
+using System.Runtime.ExceptionServices;
 
 namespace Jenkins2
 {
@@ -32,19 +37,22 @@ namespace Jenkins2
 		public void OneTimeSetupTest()
 		{
 			Logger.Logger.InitLogger();
+			SetOutputLogFileName(TestContext.CurrentContext.Test.ClassName);
 		}
 
 		[SetUp]
 		public void SetUp()
 		{
-			//Logger.Logger.GetLogger.Error(this.GetType().UnderlyingSystemType.Name);
-			//Logger.Logger.GetLogger.Error(NUnit.Framework.TestContext.CurrentContext);
+			Logger.Logger.GetLogger.Info($"Test {TestContext.CurrentContext.Test.MethodName} started from {TestContext.CurrentContext.Test.ClassName}");
 			TakeVideo($"{TestContext.CurrentContext.Test.ClassName}_{TestContext.CurrentContext.Test.Name}");
 		}
+
 
 		[TearDown]
 		public void TearDown()
 		{
+			Logger.Logger.GetLogger.Info($"Test {TestContext.CurrentContext.Test.MethodName} finished with status " +
+				$"{TestContext.CurrentContext.Result.Outcome.Status}, Message: {TestContext.CurrentContext.Result.Message}");
 			StopRecording(TestContext.CurrentContext);
 			if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed)
 			{

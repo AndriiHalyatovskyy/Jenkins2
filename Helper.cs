@@ -1,10 +1,14 @@
-﻿using Microsoft.Expression.Encoder.ScreenCapture;
+﻿using log4net.Appender;
+using log4net.Core;
+using log4net.Repository.Hierarchy;
+using Microsoft.Expression.Encoder.ScreenCapture;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
 using OpenQA.Selenium;
 using System;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Jenkins2
@@ -72,10 +76,28 @@ namespace Jenkins2
 				recorder.Stop();
 				recorder.Dispose();
 			}
+
 			if (context.Result.Outcome.Status != TestStatus.Failed)
 			{
 				//File.Delete(filepath);
 			}
 		}
+
+		public void SetOutputLogFileName(string fileName)
+		{
+			foreach (FileAppender appender in LoggerManager.GetAllRepositories()[0].GetAppenders())
+			{
+				try
+				{
+					appender.File = $"Logs\\{fileName}.log";
+					appender.ActivateOptions();
+				}
+				catch (Exception ex)
+				{
+					Console.WriteLine(ex.Message);
+				}
+			}
+		}
+
 	}
 }
