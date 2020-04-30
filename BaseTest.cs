@@ -1,15 +1,8 @@
-﻿using Allure.Commons;
+﻿using Jenkins2.RestFolder;
 using Jenkins2.Tests;
-using log4net.Core;
 using NUnit.Framework;
-using NUnit.Framework.Constraints;
 using NUnit.Framework.Interfaces;
-using NUnit.Framework.Internal;
 using OpenQA.Selenium;
-using System;
-using System.IO;
-using System.Reflection.Emit;
-using System.Runtime.ExceptionServices;
 
 namespace Jenkins2
 {
@@ -18,6 +11,7 @@ namespace Jenkins2
 
 		private IWebDriver _driver;
 		private Pages.Pages _pages;
+		private REST _rest;
 		protected IWebDriver Driver
 		{
 			get
@@ -30,6 +24,11 @@ namespace Jenkins2
 				}
 				return _driver;
 			}
+		}
+
+		protected REST Rest
+		{
+			get { return _rest ?? (_rest = new REST()); }
 		}
 
 		protected Pages.Pages Pages => _pages ?? (_pages = new Pages.Pages(
@@ -61,7 +60,7 @@ namespace Jenkins2
 
 			if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed)
 			{
-				TakeScreenshot(_driver, $"{TestContext.CurrentContext.Test.ClassName}_{TestContext.CurrentContext.Test.Name}");				
+				TakeScreenshot(_driver, $"{TestContext.CurrentContext.Test.ClassName}_{TestContext.CurrentContext.Test.Name}");
 			}
 		}
 
