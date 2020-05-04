@@ -83,7 +83,7 @@ namespace Jenkins2
 			}
 		}
 
-		public void SetOutputLogFileName(string fileName)
+		public static void SetOutputLogFileName(string fileName)
 		{
 			foreach (FileAppender appender in LoggerManager.GetAllRepositories()[0].GetAppenders())
 			{
