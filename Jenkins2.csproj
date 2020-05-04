@@ -78,6 +78,9 @@
     <Reference Include="Allure.Commons, Version=3.0.0.10, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\Allure.Commons.3.0.0.10\lib\net45\Allure.Commons.dll</HintPath>
     </Reference>
+    <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Dapper.2.0.35\lib\net461\Dapper.dll</HintPath>
+    </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
     </Reference>
@@ -187,8 +190,10 @@
   <ItemGroup>
     <Compile Include="Configuration\AssemblyInfo.cs" />
     <Compile Include="BaseTest.cs" />
+    <Compile Include="DataBase\DapperHelper.cs" />
     <Compile Include="DataBase\DBHelper.cs" />
     <Compile Include="Data\UpdatedUser.cs" />
+    <Compile Include="Data\UserFromDB.cs" />
     <Compile Include="DTO\UserDTO.cs" />
     <Compile Include="Data\UserRepository.cs" />
     <Compile Include="Helper.cs" />
@@ -206,6 +211,7 @@
     <Compile Include="RestFolder\REST.cs" />
     <Compile Include="RestFolder\Core\RestCORE.cs" />
     <Compile Include="RestFolder\Engines\User.cs" />
+    <Compile Include="Tests\DapperTest.cs" />
     <Compile Include="Tests\DatabaseTests.cs" />
     <Compile Include="Tests\RestTests.cs" />
     <Compile Include="Tests\SecondTest.cs" />

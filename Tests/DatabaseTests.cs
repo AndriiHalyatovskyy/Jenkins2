@@ -10,13 +10,13 @@ namespace Jenkins2.Tests
 		[Test]
 		public void DataBaseTestOne()
 		{
-			DBHelper.RegisterUser(UserRepository.GetAndriiUser());
+			DBHelper.RegisterUser(UserRepository.GetUserForUpdate());
 
-			Assert.True(DBHelper.GetAllUsers().Rows.Count == 1);
+			Assert.True(DBHelper.GetUserByName(UserRepository.GetUserForUpdate()).Rows.Count == 1);
 
-			DBHelper.DeleteUser(UserRepository.GetAndriiUser());
+			DBHelper.DeleteUser(UserRepository.GetUserForUpdate());
 
-			Assert.True(DBHelper.GetAllUsers().Rows.Count == 0);
+			Assert.True(DBHelper.GetUserByName(UserRepository.GetUserForUpdate()).Rows.Count == 0);
 		}
 	}
 }

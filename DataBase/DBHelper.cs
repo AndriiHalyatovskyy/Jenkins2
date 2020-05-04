@@ -1,12 +1,13 @@
 ﻿using Jenkins2.DTO;
 using MySql.Data.MySqlClient;
+using System.Configuration;
 using System.Data;
 
 namespace Jenkins2.DataBase
 {
 	public static class DBHelper
 	{
-		private static MySqlConnection dBConnection = new MySqlConnection("server=localhost;userid=root;pwd=root;database=jenkinstests");
+		private static MySqlConnection dBConnection = new MySqlConnection(ConfigurationManager.ConnectionStrings["MySqlBase"].ConnectionString);
 		private static DataTable table;
 		private static MySqlDataAdapter adapter;
 		private static MySqlCommand command;
@@ -38,6 +39,11 @@ namespace Jenkins2.DataBase
 			return dBConnection;
 		}
 
+		//public static string ConnectDapper(string name)
+		//{
+		//	//return ConfigurationManager.ConnectionStrings[name].ConnectionString;
+		//}
+
 		/// <summary>
 		/// Gets all users from DB
 		/// </summary>
@@ -49,6 +55,18 @@ namespace Jenkins2.DataBase
 			adapter = new MySqlDataAdapter();
 
 			adapter.SelectCommand = new MySqlCommand("SELECT * FROM users", GetConnection());
+			adapter.Fill(table);
+			CloseConnection();
+			return table;
+		}
+
+		public static DataTable GetUserByName(UserDTO user)
+		{
+			OpenConnection();
+			table = new DataTable();
+			adapter = new MySqlDataAdapter();
+
+			adapter.SelectCommand = new MySqlCommand($"SELECT * FROM users where firstname = '{user.name}'", GetConnection());
 			adapter.Fill(table);
 			CloseConnection();
 			return table;
