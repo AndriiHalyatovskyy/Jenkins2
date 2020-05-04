@@ -11,6 +11,9 @@ namespace Jenkins2.DataBase
 		private static MySqlDataAdapter adapter;
 		private static MySqlCommand command;
 
+		/// <summary>
+		/// Creates new connection to database
+		/// </summary>
 		private static void OpenConnection()
 		{
 			if (dBConnection.State == ConnectionState.Closed)
@@ -19,6 +22,9 @@ namespace Jenkins2.DataBase
 			}
 		}
 
+		/// <summary>
+		/// Closes database connection, if exist
+		/// </summary>
 		private static void CloseConnection()
 		{
 			if (dBConnection.State == ConnectionState.Open)
@@ -32,6 +38,10 @@ namespace Jenkins2.DataBase
 			return dBConnection;
 		}
 
+		/// <summary>
+		/// Gets all users from DB
+		/// </summary>
+		/// <returns>All registered users</returns>
 		public static DataTable GetAllUsers()
 		{
 			OpenConnection();
@@ -43,6 +53,11 @@ namespace Jenkins2.DataBase
 			CloseConnection();
 			return table;
 		}
+
+		/// <summary>
+		/// Execute specified query
+		/// </summary>
+		/// <param name="queryString">Query which should be executed</param>
 		public static DataTable ExecuteQuery(string queryString)
 		{
 			OpenConnection();
@@ -56,6 +71,10 @@ namespace Jenkins2.DataBase
 			return table;
 		}
 
+		/// <summary>
+		/// Registers new user into DB
+		/// </summary>
+		/// <param name="user"> New user</param>
 		public static void RegisterUser(UserDTO user)
 		{
 			OpenConnection();
@@ -64,6 +83,10 @@ namespace Jenkins2.DataBase
 			CloseConnection();
 		}
 
+		/// <summary>
+		/// Deletes specified user
+		/// </summary>
+		/// <param name="user">User to delete</param>
 		public static void DeleteUser(UserDTO user)
 		{
 			OpenConnection();
