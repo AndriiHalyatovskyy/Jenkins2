@@ -1,4 +1,5 @@
-﻿using Jenkins2.DTO;
+﻿using Jenkins2.DataBase.EntityFramework;
+using Jenkins2.DTO;
 using MySql.Data.MySqlClient;
 using System.Configuration;
 using System.Data;

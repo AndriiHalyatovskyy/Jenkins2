@@ -32,9 +32,8 @@ namespace Jenkins2.DataBase
 		}
 
 		/// <summary>
-		/// Returns all users in DB
+		/// Returns all users from DB
 		/// </summary>
-		/// <returns></returns>
 		public static List<UserFromDB> GetAll()
 		{
 			using (IDbConnection connection = GetConnection())
