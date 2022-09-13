@@ -293,6 +293,7 @@ node_modules/
 **/*.DesktopClient/ModelManifest.xml
 **/*.Server/GeneratedArtifacts
 **/*.Server/ModelManifest.xml
+**/allure-results
 _Pvt_Extensions
 
 # Paket dependency manager
