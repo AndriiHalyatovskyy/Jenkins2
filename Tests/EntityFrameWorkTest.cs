@@ -25,7 +25,7 @@ namespace Jenkins2.Tests
 
 				Assert.AreEqual(author.name, name);
 
-				List<BookFromDB> bu = context.books.Where(bu => bu.author.id == author.id).ToList();
+				List<BookFromDB> bu = context.books.Where(book => book.author.id == author.id).ToList();
 				Assert.True(bu.Count == 2);
 				context.authors.Remove(author);
 				context.SaveChanges();
