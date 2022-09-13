@@ -1,4 +1,5 @@
-﻿using Jenkins2.RestFolder;
+﻿using Allure.Commons;
+using Jenkins2.RestFolder;
 using Jenkins2.Tests;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
@@ -38,6 +39,7 @@ namespace Jenkins2
 		[OneTimeSetUp]
 		public void OneTimeSetupTest()
 		{
+			AllureLifecycle.Instance.CleanupResultDirectory();
 			Logger.Logger.InitLogger();
 			SetOutputLogFileName(TestContext.CurrentContext.Test.ClassName);
 		}

@@ -1,9 +1,12 @@
 ﻿using Jenkins2.Data;
+using NUnit.Allure.Core;
 using NUnit.Framework;
 using System;
 
 namespace Jenkins2.Tests
 {
+	[TestFixture]
+	[AllureNUnit]
 	public class RestTests : BaseTest
 	{
 

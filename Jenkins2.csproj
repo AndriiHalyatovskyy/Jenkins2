@@ -340,16 +340,12 @@
     <Compile Include="Tests\ThirdTest.cs" />
     <Compile Include="Configuration\WebDriverFactory.cs" />
   </ItemGroup>
-  <ItemGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <Content Include="allureConfig.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
   <ItemGroup>
-    <None Include="allureConfig.Template.json" />
+    <None Include="allureConfig.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="app.config" />
-    <None Include="allureConfig.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
