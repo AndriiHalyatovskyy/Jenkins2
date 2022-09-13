@@ -1,5 +1,5 @@
 {
   "allure": {
-    "directory": "bin/Debug/allure-results"
+    "directory": "allure-results"
   }
 }
