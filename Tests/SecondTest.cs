@@ -10,7 +10,7 @@ namespace Jenkins2.Tests
 		[Test]
 		public void SecondTestMethod()
 		{
-			Pages.Goole.DoSearch("Youtube");
+			Pages.Google.DoSearch("Youtube");
 			Pages.SearchResult.OpenSiteByTitle("Youtube");
 			Assert.True(true, "SecondTestMethod failed line 13");
 		}

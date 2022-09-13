@@ -19,10 +19,16 @@ namespace Jenkins2.Pages
 			page.SubmitForm(selectors.searchInput);
 		}
 
+		public void WaitForText(string text)
+        {
+			page.WaitForElementPresent(selectors.Anything(text));
+        }
+
 		public class GoogleSelectors
 		{
 			public readonly By searchInput = By.Name("q");
 			public readonly By searchButton = By.Name("btnK");
+			public By Anything(string text) => By.XPath($"//*[* = '{text}']");
 		}
 	}
 }

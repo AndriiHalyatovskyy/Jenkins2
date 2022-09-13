@@ -26,7 +26,7 @@ namespace Jenkins2.Pages
 		/// <summary>
 		/// Google home page
 		/// </summary>
-		public GooglePage Goole
+		public GooglePage Google
 		{
 			get { return google ?? (google = new GooglePage(this)); }
 		}
@@ -257,6 +257,81 @@ namespace Jenkins2.Pages
 		public void Clear(By element)
 		{
 			driver.FindElement(element).Clear();
+		}
+
+
+		/// <summary>
+		/// Fails test. Throws 'AssertionException' with a specified fail message.
+		/// </summary>
+		/// <param name="failMessage">Message to be displayed in test results.</param>
+		public void FailIt(string failMessage)
+		{
+			throw new Exception(failMessage);
+		}
+
+		/// <summary>
+		/// Returns the text of the given element
+		/// </summary>
+		/// <param name="element"></param>
+		/// <param name="hidden">Defaults to false - if true will return the innerHtml instead of the text that webdriver gets by default.</param>
+		/// <returns></returns>
+		public string GetText(By element, bool hidden = false)
+		{
+			WaitForElementPresent(element);
+			if (!hidden)
+			{
+				return driver.FindElement(element).GetCssValue("value");
+			}
+			else
+			{
+				return driver.FindElement(element).GetAttribute("innerHTML");
+			}
+		}
+
+		/// <summary>
+		/// Waits for text of an element
+		/// </summary>
+		/// <param name="element"> the element to look for</param>
+		/// <param name="text"> text to look for</param>
+		/// <param name="trim">trim off newlines and spaces</param>
+		/// <param name="waitTime">Time in seconds to wait for the text</param>
+		/// <param name="contains">Enter true to make search be a contains search</param>
+		/// <param name="toLower">Makes the result lowercase for comparison</param>
+		public void WaitForText(By element, string text, bool trim = true, int waitTime = defaultWait, bool contains = false, bool toLower = false, bool hidden = false)
+		{
+			string actual = string.Empty;
+			//use Wait.Timeout unless a value is passed in.
+			if (waitTime == defaultWait)
+			{
+				waitTime = Convert.ToInt32(Wait.Timeout.TotalSeconds);
+			}
+			var startTime = DateTime.Now;
+			for (int second = 0; ; second++)
+			{
+				if ((DateTime.Now - startTime).TotalSeconds >= waitTime && second > 1)
+					FailIt("Timed out in WaitForText(" + element.ToString() + ", \nExpected: " + text + "\nBut was: " + actual + ");");
+				try
+				{
+					actual = string.Empty;
+					actual = GetText(element, hidden);
+					IWebElement el = driver.FindElement(element);
+					if (trim)
+						actual = actual.Trim();
+					if (toLower)
+						actual = actual.ToLower();
+
+					if (contains)
+					{
+						if (actual.Contains(text)) break;
+					}
+					else
+					{
+						if (text == actual) break;
+					}
+				}
+				catch (Exception)
+				{ }
+			}
 		}
 
 		/// <summary>
