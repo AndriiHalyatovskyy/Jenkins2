@@ -13,7 +13,9 @@ namespace Jenkins2
 			switch (browser.ToLower())
 			{
 				case "chrome":
-					return new ChromeDriver();
+					var options = new ChromeOptions();
+					//options.AddExtension("/files/adblock.crx");
+					return new ChromeDriver(options);
 				case "firefox":
 					return new FirefoxDriver();
 				case "ie":
